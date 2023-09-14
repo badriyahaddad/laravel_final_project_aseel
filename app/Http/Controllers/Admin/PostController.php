@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
 use App\Models\Admin;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -14,9 +15,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        return response()->json([
-            'data'=>Post::all(['*'])
-        ]);
+        // return response()->json([
+        //     'data'=>Post::all(['*'])
+        // ]);
+        return PostResource::collection(Post::with('admin')->get(['*']));
     }
 
     /**
