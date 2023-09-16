@@ -31,14 +31,26 @@ class PostController extends Controller
         $category_id= $request->category_id;
          $admin = Admin::where('id', $user_id)->first();
          $category= Catagory::where('id', $category_id)->first();
+
          if ($admin&&$category) {
              Post::create($input);
              return response()->json([
                  'message' => 'Post created successfully'
              ],200);
-         } else {
+         } else if(!$admin) {
+            if(!$admin&&!$category){
+                return response()->json([
+                    'error' => 'Admin and Catagory does not exist'
+                ], 404);
+             }else{
             return response()->json([
+
                 'error' => 'Admin does not exist'
+            ], 404);}
+         }else if(!$category){
+
+            return response()->json([
+                'error' => 'Catagory does not exist'
             ], 404);
          }
      }

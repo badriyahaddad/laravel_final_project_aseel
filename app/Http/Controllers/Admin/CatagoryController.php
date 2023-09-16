@@ -23,13 +23,12 @@ class CatagoryController extends Controller
      * Store a newly created resource in storage.
      */
 
-     public function store(Request $request,$userId)
+     public function store(Request $request)
      {
-        $userId = User::findOrFail($userId)->id;
+       // $userId = User::findOrFail($userId)->id;
 
          $input = $request->validate([
-             'title' => 'required|max:255',
-
+             'title' => 'required',
          ]);
 
          Catagory::create($input);
