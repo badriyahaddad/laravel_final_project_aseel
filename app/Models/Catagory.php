@@ -10,6 +10,10 @@ class Catagory extends Model
     use HasFactory;
     protected $fillable= [
         'title',
-
     ];
+        //Relationships
+        public function posts()
+        {
+            return $this->hasMany(Post::class);
+        }
 }

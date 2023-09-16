@@ -18,8 +18,12 @@ class Post extends Model
     'category_id'
 ];
 //Relationships
-public function admin(): BelongsTo
+public function admin()
 {
     return $this->belongsTo(Admin::class,'user_id');
+}
+public function catagory()
+{
+    return $this->belongsTo(Catagory::class,'category_id');
 }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CatagoryController;
 use App\Http\Controllers\Admin\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,8 +27,7 @@ Route::prefix('admin')->group(function(){
     Route::post('refresh',[AdminAuthController::class,'refresh'] );
     Route::post('me', [AdminAuthController::class,'me']);
     Route::apiResource('post', PostController::class);
-    // Route::get('post', [PostController::class,'index']);
-
+    Route::apiResource('catagory', CatagoryController::class);
 });
 //-----------------------------------------------------------------------------------------
 //User
@@ -37,7 +37,6 @@ Route::group([
     'prefix' => 'auth'
 
 ], function ($router) {
-
     Route::post('login', [AuthController::class,'login']);
     Route::post('refresh',[AuthController::class,'refresh'] );
     Route::post('me', [AuthController::class,'me']);

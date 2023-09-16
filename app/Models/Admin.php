@@ -37,8 +37,8 @@ class Admin  extends Authenticatable implements JWTSubject
         return [];
     }
       //Relationships
-      public function posts(): HasMany
+      public function posts()
       {
-          return $this->hasMany(Post::class,'user_id');
+          return $this->hasMany(Post::class);
       }
 }

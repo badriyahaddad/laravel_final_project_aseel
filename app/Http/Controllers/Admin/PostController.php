@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Admin;
+use App\Models\Catagory;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -15,9 +17,6 @@ class PostController extends Controller
      */
     public function index()
     {
-        // return response()->json([
-        //     'data'=>Post::all(['*'])
-        // ]);
         return PostResource::collection(Post::with('admin')->get(['*']));
     }
 
@@ -25,24 +24,23 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      */
 
-     public function store(Request $request)
+     public function store(PostRequest $request)
      {
-
-         $input = $request->validate([
-             'title' => 'required|max:255',
-             'content' => 'required',
-             'location' => 'required',
-             'image' => 'required',
-             'user_id' => 'required',
-             'category_id' => 'required',
-        ]);
-            Admin::findOrFail($request->user_id)->id;
-
-         Post::create($input);
-
-         return response()->json([
-             'message' => 'Post created successfully'
-         ]);
+         $input = $request->validated();
+         $user_id = $request->user_id;
+        $category_id= $request->category_id;
+         $admin = Admin::where('id', $user_id)->first();
+         $category= Catagory::where('id', $category_id)->first();
+         if ($admin&&$category) {
+             Post::create($input);
+             return response()->json([
+                 'message' => 'Post created successfully'
+             ],200);
+         } else {
+            return response()->json([
+                'error' => 'Admin does not exist'
+            ], 404);
+         }
      }
 
     /**
