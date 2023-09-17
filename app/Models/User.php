@@ -47,4 +47,9 @@ class User extends  Authenticatable  implements Authorizable, JWTSubject
      {
          return [];
      }
+         //Relationships
+         public function comment()
+         {
+             return $this->hasMany(Comment::class.'user_id');
+         }
 }

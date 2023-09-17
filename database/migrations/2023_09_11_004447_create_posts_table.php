@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('content');
             $table->string('location');
             $table->string('image');
-            $table->integer('category_id');
+            $table->double('price',8,3);
+            $table->foreignId('category_id');
             $table->foreignId('user_id');
             $table->timestamps();
         });

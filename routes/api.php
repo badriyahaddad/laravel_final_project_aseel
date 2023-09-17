@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CatagoryController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\User\CommentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
@@ -40,5 +41,5 @@ Route::group([
     Route::post('login', [AuthController::class,'login']);
     Route::post('refresh',[AuthController::class,'refresh'] );
     Route::post('me', [AuthController::class,'me']);
-
+    Route::apiResource('comment', CommentController::class);
 });

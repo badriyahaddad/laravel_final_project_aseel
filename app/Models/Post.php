@@ -14,6 +14,7 @@ class Post extends Model
     'content',
     'location',
     'image',
+    'price',
     'user_id',
     'category_id'
 ];
@@ -25,5 +26,9 @@ public function admin()
 public function catagory()
 {
     return $this->belongsTo(Catagory::class,'category_id');
+}
+public function comments()
+{
+    return $this->hasMany(Comment::class,'post_id');
 }
 }

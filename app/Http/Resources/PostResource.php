@@ -20,9 +20,11 @@ class PostResource extends JsonResource
             'content' => $this->content,
             'location' => $this->location,
             'image' => $this->image,
+            'price' => $this->price,
             'user_id' => $this->user_id,
-            'category_id' =>new CatagoryResource($this->whenLoaded('category_id')),
+            'category_id' =>$this->category_id,
            'admin' => new AdminResource($this->whenLoaded('user_id')),
+           'catagory'=>new CatagoryResource($this->whenLoaded('category_id')),
         ];
     }
     }
