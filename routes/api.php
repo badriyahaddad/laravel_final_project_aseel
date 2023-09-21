@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\User\AuthController;
+use App\Http\Controllers\User\BookController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,6 +31,7 @@ Route::prefix('admin')->group(function(){
     Route::post('me', [AdminAuthController::class,'me']);
     Route::apiResource('post', PostController::class);
     Route::apiResource('catagory', CatagoryController::class);
+
 });
 //-----------------------------------------------------------------------------------------
 //User
@@ -42,4 +45,6 @@ Route::group([
     Route::post('refresh',[AuthController::class,'refresh'] );
     Route::post('me', [AuthController::class,'me']);
     Route::apiResource('comment', CommentController::class);
+    Route::get('comment', [CommentController::class,'index']);
+    Route::apiResource('book', BookController::class);
 });

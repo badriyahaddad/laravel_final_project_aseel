@@ -15,13 +15,18 @@ class CommentResource extends ResourceCollection
      */
     public function toArray( $request): array
     {
+        // dd($this->first()->id);
         return [
-            'id' => $this->id,
-            'user_id' => $this->user_id,
-            'post_id' => $this->post_id,
-            'content' => $this->post_id,
-            'user' => new UserResource($this->whenLoaded('user_id')),
-           'Post' =>new PostResource($this->whenLoaded('post_id')),
+            'data' => $this->collection->map(function($item){
+                return [
+                    'id'=>$item->id
+                ];
+            }),
+            // 'user_id' =>$this->id,
+            // 'post_id' => $this->id,
+            // 'content' => $this->id,
+            // 'user' => new UserResource($this->whenLoaded('user')),
+// 'post' => new PostResource($this->whenLoaded('post')),
         ];
     }
 }

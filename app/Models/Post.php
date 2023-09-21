@@ -14,7 +14,6 @@ class Post extends Model
     'content',
     'location',
     'image',
-    'price',
     'user_id',
     'category_id'
 ];
@@ -29,6 +28,10 @@ public function catagory()
 }
 public function comments()
 {
-    return $this->hasMany(Comment::class,'post_id');
+    return $this->hasMany(Comment::class);
+}
+public function Book()
+{
+    return $this->hasMany(Book::class);
 }
 }

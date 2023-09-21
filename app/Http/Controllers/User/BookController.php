@@ -3,28 +3,28 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CommentRequest;
-use App\Http\Resources\CommentResource;
-use App\Models\Comment;
+use App\Http\Requests\BookRequest;
+use App\Http\Resources\BookResource;
+use App\Models\Book;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class CommentController extends Controller
+class BookController extends Controller
 {
-
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-
-        return new CommentResource(Comment::get());
-
+        return BookResource::collection(Book::with('post','user')->get(['*']));
     }
 
     /**
      * Store a newly created resource in storage.
      */
 
-     public function store(CommentRequest $request)
+     public function store(BookRequest $request)
      {
          $input = $request->validated();
          $user_id = $request->user_id;
@@ -35,9 +35,9 @@ class CommentController extends Controller
 
          if ($user&&$post) {
 
-            Comment::create($input);
+            Book::create($input);
              return response()->json([
-                 'message' => 'Comment created successfully'
+                 'message' => 'Book appointment created successfully'
              ],200);
          }
           else
@@ -68,24 +68,23 @@ class CommentController extends Controller
      */
     public function show(string $id)
     {
-        $Comment = Comment::findOrFail($id);
+        $Book = Book::findOrFail($id);
         return response()->json([
-            'data' => $Comment
+            'data' => $Book
         ]);
-
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Comment $request, string $id)
+    public function update(Book $request, string $id)
     {
         $input = $request->validated();
 
-        $Comment = Comment::findOrFail($id);
-        $Comment->update($input);
+        $Book = Book::findOrFail($id);
+        $Book->update($input);
         return response()->json([
-            'message' => 'Comment updated successfully'
+            'message' => 'Book updated successfully'
         ]);
     }
 
@@ -94,10 +93,10 @@ class CommentController extends Controller
      */
     public function destroy(string $id)
     {
-        $Comment = Comment::findOrFail($id);
-        $Comment->delete();
+        $Book = Book::findOrFail($id);
+        $Book->delete();
         return response()->json([
-            'message' => 'Comment deleted successfully'
+            'message' => 'Book deleted successfully'
         ]);
     }
 }
