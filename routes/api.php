@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CatagoryController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\UplaodImageController;
 use App\Http\Controllers\User\CommentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,10 @@ use App\Http\Controllers\User\BookController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+//-----------------------------------------------------------------------------------------
+//uplaoding image
+
+Route::post('upload', UplaodImageController::class);
 //-----------------------------------------------------------------------------------------
 //Admin
 Route::prefix('admin')->group(function(){
